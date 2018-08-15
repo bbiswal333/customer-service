@@ -23,7 +23,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.sap.refapps.espm.model.Cart;
 import com.sap.refapps.espm.model.Customer;
-import com.sap.refapps.espm.model.Product;
 import com.sap.refapps.espm.service.CustomerService;
 
 /**
