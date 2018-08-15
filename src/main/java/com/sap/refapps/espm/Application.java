@@ -50,7 +50,7 @@ public class Application implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		if (Arrays.stream(environment.getActiveProfiles())
-				.anyMatch(env -> (env.equalsIgnoreCase("local") || env.equalsIgnoreCase("cloud")))) {
+				.anyMatch(env -> (env.equalsIgnoreCase("local") || env.equalsIgnoreCase("cloud") || env.equalsIgnoreCase("heroku")))) {
 			customerService.loadCustomer(CUSTOMER_DATA_LOCATION);
 		}
 	}
