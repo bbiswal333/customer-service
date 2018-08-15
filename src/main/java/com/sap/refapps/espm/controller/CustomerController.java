@@ -23,6 +23,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.sap.refapps.espm.model.Cart;
 import com.sap.refapps.espm.model.Customer;
+import com.sap.refapps.espm.model.Product;
 import com.sap.refapps.espm.service.CustomerService;
 
 /**
@@ -52,6 +53,24 @@ public class CustomerController {
 	 * @param emailAddress
 	 * @return customer if email id is valid
 	 */
+	
+	@GetMapping(CustomerController.API_CUSTOMER)
+	public ResponseEntity<Iterable<Customer>> getAllCustomers() throws InterruptedException {
+		final Iterable<Customer> customers;
+		try {
+			//To slow it down and get effects of rate limiting
+			Thread.sleep(1000);
+			customers = customerService.getAllCustomers();
+			if (customers != null)
+				return new ResponseEntity<>(customers, HttpStatus.OK);
+			return errorMessage("Not found", HttpStatus.NOT_FOUND);
+		} catch (DataAccessException e) {
+			logger.error("Database is down");
+			return errorMessage("Database service is temporarily down. Please try again later",
+					HttpStatus.SERVICE_UNAVAILABLE);
+		}
+	}
+	
 	@GetMapping(CustomerController.API_CUSTOMER + "{emailId}")
 	public ResponseEntity<?> getCustomerByEmailAddress(@PathVariable("emailId") final String emailAddress) {
 

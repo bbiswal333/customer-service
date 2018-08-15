@@ -120,4 +120,9 @@ public class CustomerServiceImpl implements CustomerService {
 		}*/
 	}
 
+	@Override
+	public Iterable<Customer> getAllCustomers() {
+		return customerRepository.findAll();
+	}
+
 }

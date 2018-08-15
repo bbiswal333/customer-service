@@ -87,4 +87,6 @@ public interface CustomerService {
 	 * @throws IOException
 	 */
 	void loadCustomer(String filePath) throws IOException;
+	
+	Iterable<Customer> getAllCustomers();
 }
