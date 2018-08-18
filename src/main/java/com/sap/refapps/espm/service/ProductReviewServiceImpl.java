@@ -1,5 +1,9 @@
 package com.sap.refapps.espm.service;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.TimeZone;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +28,29 @@ public class ProductReviewServiceImpl implements ProductReviewService {
 	}
 	@Override
 	public boolean postReview(ProductReview productReview) {
+		//date formatter
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+		
 		ProductReview flag;
 		String reviewId = UUID.randomUUID().toString();
-        productReview.setReviewId(reviewId);
+		String timestamp = sdf.format(new Date());
+        
+		productReview.setReviewId(reviewId);
+		productReview.setTimestamp(timestamp);
 		flag = productReviewRepository.save(productReview);
 		if(flag != null){
 			return true;
 		}
 			return false;
+	}
+	@Override
+	public void updateReviewLikes(String reviewId) {
+		productReviewRepository.updateReviewLikes(reviewId);
+	}
+	@Override
+	public void updateReviewDislikes(String reviewId) {
+		productReviewRepository.updateReviewDislikes(reviewId);
 	}
 	
 	

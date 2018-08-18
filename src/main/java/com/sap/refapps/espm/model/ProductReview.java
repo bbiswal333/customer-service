@@ -31,6 +31,30 @@ public class ProductReview {
 	@JoinColumn(name = "CUSTOMER_ID")
 	private Customer customer;
 
+	public int getLikes() {
+		return likes;
+	}
+
+	public void setLikes(int likes) {
+		this.likes = likes;
+	}
+
+	public int getDislikes() {
+		return dislikes;
+	}
+
+	public void setDislikes(int dislikes) {
+		this.dislikes = dislikes;
+	}
+
+	public String getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(String timestamp) {
+		this.timestamp = timestamp;
+	}
+
 	@Column(length = 500, name = "REVIEW_DESCRIPTION", nullable = false)
 	private String reviewDescription;
 	
@@ -39,6 +63,15 @@ public class ProductReview {
 	
 	@Column(length = 50, name = "SENTIMENTS")
 	private String sentiments;
+	
+	@Column(name = "LIKES")
+	private int likes;
+	
+	@Column(name = "DISLIKES")
+	private int dislikes;
+	
+	@Column(name = "TIMESTAMP")
+	private String timestamp;
 
 	public String getReviewId() {
 		return reviewId;

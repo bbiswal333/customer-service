@@ -25,4 +25,8 @@ public interface ProductReviewService {
 	 */
 	boolean postReview(ProductReview productReview);
 	
+	void updateReviewLikes(String reveiwId);
+	
+	void updateReviewDislikes(String reveiwId);
+	
 }

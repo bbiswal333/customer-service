@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -59,6 +60,16 @@ public class ProductReviewController {
         if(!productReviewService.postReview(productReview))
 			return errorMessage("Service Currently Unavailable",HttpStatus.SERVICE_UNAVAILABLE);
 		return new ResponseEntity<>("Product review created", HttpStatus.CREATED);
+	}
+	
+	@PutMapping("/reviews/{id}/likes")
+	public void updateReviewLikes(@PathVariable(value = "id") String reviewId){
+		productReviewService.updateReviewLikes(reviewId);
+	}
+	
+	@PutMapping("/reviews/{id}/dislikes")
+	public void updateReviewDislikes(@PathVariable(value = "id") String reviewId){
+		productReviewService.updateReviewDislikes(reviewId);
 	}
 	
 	
