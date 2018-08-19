@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 import org.springframework.retry.annotation.EnableRetry;
+import org.springframework.web.client.RestTemplate;
 
 import com.sap.refapps.espm.config.CustomerApplicationContextInitializer;
 import com.sap.refapps.espm.service.CustomerService;
@@ -54,5 +57,14 @@ public class Application implements CommandLineRunner {
 			customerService.loadCustomer(CUSTOMER_DATA_LOCATION);
 		}
 	}
+	
+	/**
+     * @param builder
+     * @return RestTemplate
+     */
+    @Bean
+    public RestTemplate rest(RestTemplateBuilder builder) {
+      return builder.build();
+    }
 
 }

@@ -29,7 +29,7 @@ public interface ProductReviewRepository extends CrudRepository<ProductReview, S
 	@Query(value = "UPDATE PRODUCT_REVIEW SET LIKES = LIKES + 1 WHERE REVIEW_ID = ?1", nativeQuery = true)
 	void updateReviewLikes(@Param("REVIEW_ID") String reviewId);
 	
-	@Modifying(clearAutomatically = true)
+	@Modifying()
 	@Transactional(readOnly=false)
 	@Query(value = "UPDATE PRODUCT_REVIEW SET DISLIKES = DISLIKES + 1 WHERE REVIEW_ID = ?1", nativeQuery = true)
 	void updateReviewDislikes(@Param("REVIEW_ID") String reviewId);
